@@ -990,7 +990,7 @@ func (a *GuiApp) callDeepSeekAPI(userMessage string, skillContent string, imageD
 	}()
 
 	// 构建系统提示词
-	systemPrompt := `你是太极 Code AI 助手。【核心规则】当用户激活技能时，你必须严格按技能工作流执行，禁止询问用户要做什么，禁止提供选项列表，禁止仅做文本分析。直接输出结果。
+	systemPrompt := `你是太极 Code AI 助手。【核心规则】当用户激活技能时，你必须先根据技能工作流向用户询问具体的输出要求（如风格、格式、长度、重点等），确认用户需求后再严格按工作流执行。禁止跳过询问直接执行，禁止提供选项列表让用户选择，禁止仅做文本分析而不执行。
 你可以使用以下工具：
 - shell_exec：执行本地 shell 命令
 - read_file：读取文件内容
