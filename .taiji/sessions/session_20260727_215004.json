@@ -1,0 +1,46 @@
+{
+  "id": "session_20260727_215004",
+  "created_at": "0001-01-01T00:00:00Z",
+  "updated_at": "2026-07-27T21:50:06.7482034+08:00",
+  "work_dir": "C:\\Users\\Administrator\\.qoderworkcn\\workspace\\ms389t2n2ynckodt\\taiji-code",
+  "model": "deepseek-chat",
+  "messages": [
+    {
+      "role": "system",
+      "content": "你是太极Code，一个强大的AI编程助手，运行在用户的终端中。你帮助用户完成编程、文件操作、代码分析等各种任务。\n\n## 核心行为\n- **直接行动**：不要说\"我来帮你...\"，直接做\n- **先读后改**：修改文件前必须先读取理解上下文\n- **精确编辑**：优先用 edit_file 做精确替换，而非 write_file 重写整个文件\n- **验证结果**：执行命令后检查输出，确认成功\n- **简洁回复**：回答简短准确，不啰嗦\n\n## 工具使用策略\n- read_file: 读取文件。大文件用 offset/limit 分段读\n- write_file: 创建新文件或完全重写（谨慎使用）\n- edit_file: 精确替换文本。old_string 必须唯一匹配，包含前后 2-3 行上下文\n- bash: 执行命令。支持所有 shell 命令\n- list_dir: 列出目录\n- glob_find: 按模式查找文件（支持 ** 递归）\n- grep_search: 正则搜索文件内容\n- git: Git 操作（status/diff/log/add/commit 等）\n\n## 工作流\n1. 理解任务 → 2. 读取相关文件 → 3. 规划修改 → 4. 精确编辑 → 5. 验证结果\n- 创建项目时先规划目录结构，再逐个创建文件\n- 修复 bug 时先复现，再定位，再修复\n- 重构时确保不破坏现有功能\n\n## 输出规范\n- 代码块用三个反引号加语言名标记\n- 文件路径用反引号包裹\n- 重要信息用 **加粗**"
+    },
+    {
+      "role": "user",
+      "content": "列出当前目录下的文件"
+    },
+    {
+      "role": "assistant",
+      "tool_calls": [
+        {
+          "id": "call_00_b7CqEWKb57bptq7kM88z9165",
+          "type": "function",
+          "function": {
+            "name": "list_dir",
+            "arguments": "{\"path\": \".\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "目录: .\n\n目录:\n  internal/\n  types/\n\n文件:\n  go.mod (1.7 KB)\n  go.sum (7.4 KB)\n  main.go (15.0 KB)\n  taiji-code.exe (19.4 MB)\n\n共 2 个目录, 4 个文件",
+      "tool_call_id": "call_00_b7CqEWKb57bptq7kM88z9165",
+      "name": "list_dir"
+    },
+    {
+      "role": "assistant",
+      "content": "当前目录下内容：\n\n**目录：**\n- `internal/`\n- `types/`\n\n**文件：**\n- `go.mod` (1.7 KB) — Go 模块文件\n- `go.sum` (7.4 KB) — 依赖校验文件\n- `main.go` (15.0 KB) — 主程序入口\n- `taiji-code.exe` (19.4 MB) — 编译后的可执行文件\n\n这是一个 Go 项目，看起来是 `taiji-code` 工具。需要进一步查看具体内容吗？"
+    }
+  ],
+  "summary": "列出当前目录下的文件",
+  "usage": {
+    "prompt_tokens": 3123,
+    "completion_tokens": 159,
+    "total_tokens": 3282
+  }
+}

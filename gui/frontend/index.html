@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>太极 Code</title>
+    <link rel="stylesheet" href="./src/style.css"/>
+</head>
+<body>
+<div class="app-container">
+    <!-- 左侧边栏 -->
+    <aside class="sidebar-left">
+        <div class="sidebar-header">
+            <div class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">太极 Code</span>
+            </div>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <div class="nav-section">
+                <div class="nav-item active" data-page="task">
+                    <span class="nav-icon"></span>
+                    <span class="nav-label">任务</span>
+                </div>
+                <div class="nav-item" data-page="channel">
+                    <span class="nav-icon"></span>
+                    <span class="nav-label">频道</span>
+                </div>
+            </div>
+            
+            <div class="nav-section">
+                <div class="nav-section-title">扩展</div>
+                <div class="nav-item" data-page="expert">
+                    <span class="nav-icon">🎯</span>
+                    <span class="nav-label">专家套件</span>
+                </div>
+                <div class="nav-item" data-page="skills">
+                    <span class="nav-icon">🛠️</span>
+                    <span class="nav-label">技能</span>
+                </div>
+                <div class="nav-item" data-page="connectors">
+                    <span class="nav-icon">🔗</span>
+                    <span class="nav-label">连接器</span>
+                </div>
+            </div>
+            
+            <div class="nav-section">
+                <div class="nav-section-title">自动化</div>
+                <div class="nav-item" data-page="cron">
+                    <span class="nav-icon">⏰</span>
+                    <span class="nav-label">定时任务</span>
+                </div>
+                <div class="nav-item" data-page="im">
+                    <span class="nav-icon">📱</span>
+                    <span class="nav-label">IM 频道</span>
+                </div>
+            </div>
+        </nav>
+        
+        <div class="sidebar-footer">
+            <div class="user-profile">
+                <div class="user-avatar"></div>
+                <div class="user-info">
+                    <div class="user-name">用户</div>
+                    <div class="user-plan">专业版</div>
+                </div>
+            </div>
+        </div>
+    </aside>
+    
+    <!-- 主内容区 -->
+    <main class="main-content">
+        <!-- 任务列表页 -->
+        <div class="page task-page" id="page-task">
+            <div class="task-list-header">
+                <h2>最近任务</h2>
+                <button class="btn-new-task" onclick="newTask()">+ 新任务</button>
+            </div>
+            <div class="task-list" id="task-list">
+                <!-- 任务项会动态添加 -->
+            </div>
+        </div>
+        
+        <!-- 任务详情页 -->
+        <div class="page task-detail-page hidden" id="page-task-detail">
+            <div class="task-detail-header">
+                <button class="btn-back" onclick="backToTaskList()">← 返回</button>
+                <h2 id="task-title">任务标题</h2>
+                <span class="task-subtitle" id="task-subtitle">内容由 AI 生成</span>
+            </div>
+            
+            <div class="task-detail-content">
+                <div class="conversation-area" id="conversation-area">
+                    <!-- 对话内容会动态添加 -->
+                </div>
+                
+                <div class="input-area">
+                    <div class="input-container">
+                        <textarea id="message-input" placeholder="描述任务，/ 快捷调用，@ 添加上下文" rows="3"></textarea>
+                        <div class="input-actions">
+                            <div class="input-left-actions">
+                                <button class="btn-action" title="添加附件">+</button>
+                                <button class="btn-action" title="语音输入">🎤</button>
+                            </div>
+                            <div class="input-right-actions">
+                                <select class="model-select" id="model-select">
+                                    <option value="deepseek-chat">DeepSeek Chat</option>
+                                    <option value="deepseek-coder">DeepSeek Coder</option>
+                                </select>
+                                <button class="btn-send" onclick="sendMessage()">↑</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- 右侧边栏 -->
+    <aside class="sidebar-right">
+        <div class="right-panel-header">
+            <h3>任务监控</h3>
+        </div>
+        
+        <div class="right-panel-content">
+            <!-- 待办事项 -->
+            <div class="panel-section">
+                <div class="section-header">
+                    <span class="section-title">待办</span>
+                    <span class="section-toggle">▼</span>
+                </div>
+                <div class="section-content" id="todo-list">
+                    <!-- 待办事项会动态添加 -->
+                </div>
+            </div>
+            
+            <!-- 产物 -->
+            <div class="panel-section">
+                <div class="section-header">
+                    <span class="section-title">产物</span>
+                    <span class="section-toggle">▼</span>
+                </div>
+                <div class="section-content" id="products-list">
+                    <div class="product-item">
+                        <span class="product-icon">📄</span>
+                        <span class="product-name">默认工作目录</span>
+                    </div>
+                    <div class="product-item">
+                        <span class="product-icon">📁</span>
+                        <span class="product-name">最终文件</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 工作文件 -->
+            <div class="panel-section">
+                <div class="section-header">
+                    <span class="section-title">工作文件</span>
+                    <span class="section-toggle">▼</span>
+                </div>
+                <div class="section-content" id="working-files">
+                    <!-- 工作文件会动态添加 -->
+                </div>
+            </div>
+        </div>
+    </aside>
+</div>
+
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>

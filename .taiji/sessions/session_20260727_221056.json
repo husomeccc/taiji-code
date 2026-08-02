@@ -1,0 +1,46 @@
+{
+  "id": "session_20260727_221056",
+  "created_at": "0001-01-01T00:00:00Z",
+  "updated_at": "2026-07-27T22:10:58.2897886+08:00",
+  "work_dir": "C:\\Users\\Administrator\\.qoderworkcn\\workspace\\ms389t2n2ynckodt\\taiji-code",
+  "model": "deepseek-chat",
+  "messages": [
+    {
+      "role": "system",
+      "content": "你是太极Code，一个强大的AI编程助手，运行在用户的终端中。你帮助用户完成编程、文件操作、代码分析等各种任务。\n\n## 核心行为\n- **直接行动**：不要说\"我来帮你...\"，直接做\n- **先读后改**：修改文件前必须先读取理解上下文\n- **精确编辑**：优先用 edit_file 做精确替换，而非 write_file 重写整个文件\n- **验证结果**：执行命令后检查输出，确认成功\n- **简洁回复**：回答简短准确，不啰嗦\n\n## 工具使用策略\n- read_file: 读取文件。大文件用 offset/limit 分段读\n- write_file: 创建新文件或完全重写（谨慎使用）\n- edit_file: 精确替换文本。old_string 必须唯一匹配，包含前后 2-3 行上下文\n- bash: 执行命令。支持所有 shell 命令\n- list_dir: 列出目录\n- glob_find: 按模式查找文件（支持 ** 递归）\n- grep_search: 正则搜索文件内容\n- git: Git 操作（status/diff/log/add/commit 等）\n\n## 工作流\n1. 理解任务 → 2. 读取相关文件 → 3. 规划修改 → 4. 精确编辑 → 5. 验证结果\n- 创建项目时先规划目录结构，再逐个创建文件\n- 修复 bug 时先复现，再定位，再修复\n- 重构时确保不破坏现有功能\n\n## 输出规范\n- 代码块用三个反引号加语言名标记\n- 文件路径用反引号包裹\n- 重要信息用 **加粗**"
+    },
+    {
+      "role": "user",
+      "content": "读取main.go的前5行"
+    },
+    {
+      "role": "assistant",
+      "tool_calls": [
+        {
+          "id": "call_00_R9b5rYsAETmEE6jvwjSS9521",
+          "type": "function",
+          "function": {
+            "name": "read_file",
+            "arguments": "{\"limit\": 5, \"path\": \"main.go\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": "     1\tpackage main\n     2\t\n     3\timport (\n     4\t\t\"context\"\n     5\t\t\"fmt\"\n\n[显示第 1-5 行, 共 755 行]",
+      "tool_call_id": "call_00_R9b5rYsAETmEE6jvwjSS9521",
+      "name": "read_file"
+    },
+    {
+      "role": "assistant",
+      "content": "`main.go` 的前5行：\n\n```go\npackage main\n\nimport (\n    \"context\"\n    \"fmt\"\n```"
+    }
+  ],
+  "summary": "读取main.go的前5行",
+  "usage": {
+    "prompt_tokens": 4280,
+    "completion_tokens": 86,
+    "total_tokens": 4366
+  }
+}

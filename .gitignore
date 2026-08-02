@@ -1,0 +1,7 @@
+﻿build/
+*.exe
+*.msi
+*.zip
+skills/
+.DS_Store
+Thumbs.db
