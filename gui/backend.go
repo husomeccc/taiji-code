@@ -593,7 +593,7 @@ func getToolDefinitions() []ToolDef {
 			Type: "function",
 			Function: FunctionDef{
 				Name:        "generate_image",
-				Description: "根据文字描述生成 AI 图片。使用英文描述效果更佳。图片将保存到工作目录。",
+				Description: "根据文字描述生成 AI 图片。仅在用户明确要求生成/画图片时才调用。如果用户只是描述场景或写文案，不要调用此工具。图片将保存到工作目录。",
 				Parameters: map[string]interface{}{
 					"type": "object",
 					"properties": map[string]interface{}{
@@ -996,6 +996,11 @@ func (a *GuiApp) callDeepSeekAPI(userMessage string, skillContent string, imageD
 - read_file：读取文件内容
 - write_file：写入文件
 - list_files：列出目录文件
+- generate_image：根据文字描述生成 AI 图片
+
+【工具调用规则】
+- generate_image 仅在用户明确要求"生成图片"、"画图"、"画一张图"时才调用。如果用户只是描述场景、写文案、写提示词，禁止调用此工具，直接用文字回复即可。
+- 不要将用户的创意写作、场景描述、分镜脚本等内容当作画图请求。
 
 当需要执行代码或操作文件时，请直接使用工具执行，而不是仅告诉用户如何操作。
 工作目录：` + a.workDir
